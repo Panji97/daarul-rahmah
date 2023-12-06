@@ -21,7 +21,7 @@ class RoleController extends Controller
             abort(403, 'unauthorized');
         }
 
-        return view('roles.index');
+        return 'wadespo';
     }
 
     /**
