@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\RoleDataTable;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,13 +17,10 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(RoleDataTable $dataTable)
     {
-        if (Gate::allows('read role')) {
-            abort(403, 'unauthorized');
-        }
-
-        return 'wadespo';
+        $this->authorize('read role');
+        return $dataTable->render('configuration.roles');
     }
 
     /**
@@ -51,9 +50,9 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        //
+        return view('configuration.roles-action', compact('role'));
     }
 
     /**
