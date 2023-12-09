@@ -58,9 +58,17 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        dd($request->all());
+        $role->name = $request->name;
+        $role->guard_name = $request->guard_name;
+        $role->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Updated data successfully'
+        ]);
     }
 
     /**

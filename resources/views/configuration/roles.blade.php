@@ -52,18 +52,31 @@
             success: function(res) {
                 $('#largeModal').find('.modal-dialog').html(res)
                 modal.show()
-                console.log(res)
-                // store()
+                store()
             }
         })
 
-        // function store() {
-        //     $('#formAction').on('submit', function(e) {
-        //         e.preventDefault()
+        function store() {
+            $('#formAction').on('submit', function(e) {
+                e.preventDefault()
+                const _form = this
+                const formData = new FormData(_form)
 
-        //         console.log(this)
-        //     })
-        // }
+                $.ajax({
+                    method: 'put',
+                    url: `{{ url('configuration/roles/')}}/${id}`,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        modal.hide()
+                    }
+                })
+            })
+        }
 
     })
 </script>
