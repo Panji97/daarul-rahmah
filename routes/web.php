@@ -31,7 +31,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::resource('/roles', RoleController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('configuration/roles', RoleController::class);
+});
+
+// Route::resource('/roles', RoleController::class);
+
 // Route::controller(RoleController::class)->group(function () {
 //     Route::get('/routes', 'index')->middleware('can:read role');
 //     Route::get('/create', 'create')->middleware('can:create role');
